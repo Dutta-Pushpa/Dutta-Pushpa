@@ -264,7 +264,7 @@ function App() {
 
   const pageActions = <>
     <button className="icon-button notification" aria-label="Notifications" onClick={() => setView('recommendations')}><Bell size={17} /><span /></button>
-    <button className="avatar-button" title={analyst}>{analyst.split(' ').map((part) => part[0]).slice(0, 2).join('').toUpperCase()}</button>
+    <button className="avatar-button" title={`Sign out ${analyst}`} aria-label={`Sign out ${analyst}`} onClick={signOut}>{analyst.split(' ').map((part) => part[0]).slice(0, 2).join('').toUpperCase()}</button>
   </>;
 
   return (

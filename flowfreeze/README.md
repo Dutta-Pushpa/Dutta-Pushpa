@@ -145,8 +145,8 @@ Create a `.env` file if required by your deployment environment.
 | APP_ENV            | Application environment      | development                    |
 | DATABASE_URL       | Database connection string   | sqlite:///./data/flowfreeze.db |
 | RANDOM_SEED        | Synthetic dataset seed       | 42                             |
-| ENABLE_DEMO_WRITES | Enable demo write operations | false                          |
-| DEMO_WRITE_KEY     | Demo authorization key       | YOUR_SECRET_KEY                |
+| ENABLE_DEMO_WRITES | Enable synthetic demo writes | true                           |
+| DEMO_WRITE_KEY     | Public synthetic-demo token  | public-synthetic-demo-v1       |
 
 ### Frontend Environment Variables
 
@@ -154,11 +154,12 @@ Create `frontend/.env.local`:
 
 ```env
 VITE_API_BASE_URL=http://127.0.0.1:8000
+VITE_DEMO_WRITE_KEY=public-synthetic-demo-v1
 ```
 
-Use deployment-specific URLs when hosting remotely.
+For the public Render deployment, `VITE_API_BASE_URL` is `https://flowfreeze-api.onrender.com`.
 
-> Never commit real credentials, secrets, API keys, or production configuration values.
+> `public-synthetic-demo-v1` is intentionally public and only unlocks synthetic decision/audit simulations. It is shipped in the frontend bundle, is not authentication, and must never be reused for real services. Never commit real credentials, secrets, or production keys.
 
 ---
 
@@ -190,19 +191,15 @@ bash scripts/render-start.sh
 
 ### Frontend
 
-Replace with actual deployment URL:
+Live Render deployment:
 
-```text
-https://YOUR_FRONTEND_DEPLOYMENT_URL
-```
+[https://flowfreeze-web.onrender.com](https://flowfreeze-web.onrender.com)
 
 ### Backend
 
-Replace with actual deployment URL:
+Live Render API:
 
-```text
-https://YOUR_BACKEND_DEPLOYMENT_URL
-```
+[https://flowfreeze-api.onrender.com](https://flowfreeze-api.onrender.com) · [API docs](https://flowfreeze-api.onrender.com/docs) · [Health](https://flowfreeze-api.onrender.com/health)
 
 ---
 

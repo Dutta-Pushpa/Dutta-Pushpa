@@ -30,3 +30,15 @@
 
 > Manually clicking buttons is too 2010
 
+
+
+## FlowFreeze — synthetic MFS fraud-analysis demo
+
+A human-in-the-loop prototype for tracing reported MFS transfers through downstream wallets, estimating taint, and reviewing synthetic intervention simulations. It does not connect to upay BD production systems or control real wallets.
+
+- **Live analyst workspace:** [flowfreeze-web.onrender.com](https://flowfreeze-web.onrender.com)
+- **API:** [flowfreeze-api.onrender.com](https://flowfreeze-api.onrender.com)
+- **API documentation:** [OpenAPI / Swagger](https://flowfreeze-api.onrender.com/docs)
+- **Project source and setup:** [`flowfreeze/`](flowfreeze/)
+
+The public demo permits synthetic decisions for testing. Its demo token is public and is not an authentication or security boundary; no customer or production data should be used.

@@ -13,9 +13,10 @@ def require_demo_write_access(
 ) -> None:
     """Allow local writes, but make public writes explicitly opt-in and keyed.
 
-    The frontend's demo login is intentionally not authentication. In production,
-    writes stay disabled unless the operator enables them and configures a secret
-    request key. This keeps a public Render demo read-only by default.
+    The frontend's demo login is intentionally not authentication. Outside
+    development, writes stay disabled unless the operator enables them and
+    configures a request key. If that key is shipped to a public frontend, it is
+    not authentication; use this only for synthetic demo data.
     """
     app_env = os.getenv("APP_ENV", "development").lower()
     if app_env == "development":

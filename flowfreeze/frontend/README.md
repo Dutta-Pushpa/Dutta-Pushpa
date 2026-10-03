@@ -38,7 +38,8 @@ The models and all displayed evaluation values are based on generated data. They
 - The analyst-name gate is only a local display-name/session convenience; it is **not authentication** or an authorization boundary.
 - Approve/reject/modify actions write synthetic analyst decisions and simulated outcomes to the local SQLite audit tables. They never hold, move, or otherwise control a real wallet.
 - The local run command explicitly sets `APP_ENV=development`; this enables the synthetic decision buttons without requiring a key. Do not run this mode against real services or data.
-- Public/production deployments remain read-only by default (`ENABLE_DEMO_WRITES=false` in `render.yaml`). To enable a controlled synthetic deployment, set `ENABLE_DEMO_WRITES=true` and `DEMO_WRITE_KEY` on the API, then provide the matching `VITE_DEMO_WRITE_KEY` at frontend build time. A `VITE_` value is shipped to every browser and is **not a secret or real access control**; only use this for synthetic demo data, never for real wallet or customer systems.
+- The public Render demo enables synthetic decisions with `ENABLE_DEMO_WRITES=true` and the matching `DEMO_WRITE_KEY` / `VITE_DEMO_WRITE_KEY` value in `render.yaml`.
+- That shared token is intentionally public (it is included in this repository and the browser bundle), not authentication. It only enables synthetic decision/audit simulations. Never reuse it or connect this prototype to customer data or real wallet systems. Other production deployments remain read-only unless explicitly configured.
 - All incident amounts, wallet identities, model scores, taint estimates, and what-if results are synthetic and should remain clearly labeled in any deployment or presentation.
 
 ## Frontend commands

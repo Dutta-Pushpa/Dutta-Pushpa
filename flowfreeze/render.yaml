@@ -17,7 +17,11 @@ services:
       - key: RANDOM_SEED
         value: "42"
       - key: ENABLE_DEMO_WRITES
-        value: "false"
+        value: "true"
+      # This demo-only key is public because the Vite bundle ships it to browsers.
+      # It is not authentication and must never be reused for real services.
+      - key: DEMO_WRITE_KEY
+        value: public-synthetic-demo-v1
       - key: CORS_ORIGINS
         value: https://flowfreeze-web.onrender.com
 
@@ -31,3 +35,5 @@ services:
     envVars:
       - key: VITE_API_BASE_URL
         value: https://flowfreeze-api.onrender.com
+      - key: VITE_DEMO_WRITE_KEY
+        value: public-synthetic-demo-v1

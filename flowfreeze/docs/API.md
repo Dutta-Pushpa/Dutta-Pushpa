@@ -40,7 +40,8 @@ Rejected decisions must use amount zero. Approved or modified amounts must be po
 
 ## Safety and deployment limits
 
-- The API has no production authentication or provider integration; bind it to a trusted local development environment only.
+- The API has no production authentication or provider integration. This repository's public Render demo enables simulated decisions with a shared token that is committed here and shipped in the frontend bundle; that token is a demo write gate, **not authentication**.
+- The public deployment can record synthetic audit entries and outcome estimates. Anyone who can use the public demo can submit them. Keep the dataset synthetic; never connect customer data, production credentials, or wallet systems.
 - There are no wallet-control routes. Decision approval never changes a ledger or contacts a wallet.
 - Audit entries are append-only through the API. A demo reset intentionally replaces the SQLite file, including local audit history.
 - After running `python -m ml.train`, `/api/analysis/{scenario_id}` automatically includes locally trained synthetic wallet scores. The metrics endpoint serves the tracked held-out metrics file even when ignored local model artifacts are absent. Missing model artifacts leave scores unavailable; caller-supplied scores are labeled illustrative.

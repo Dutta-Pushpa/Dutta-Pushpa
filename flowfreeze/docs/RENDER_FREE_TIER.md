@@ -38,22 +38,24 @@ corresponding environment values in the Render dashboard before rebuilding.
 
 ## Public-write safeguards
 
-The frontend's demo login is a UI affordance, **not authentication**. The public
-blueprint is therefore read-only by default:
+The frontend's demo login is a UI affordance, **not authentication**. This
+repository's Render blueprint intentionally enables synthetic decision testing:
 
 - `APP_ENV=production`
-- `ENABLE_DEMO_WRITES=false`
-- `DEMO_WRITE_KEY` unset
-- `POST /api/decisions` and `POST /api/simulation/{decision_id}` return `403`
+- `ENABLE_DEMO_WRITES=true`
+- `DEMO_WRITE_KEY=public-synthetic-demo-v1`
+- the same value is built into the frontend as `VITE_DEMO_WRITE_KEY`
+- decisions write only synthetic audit entries and outcome estimates; there are
+  no wallet-control routes
 - `POST /api/demo/reset` remains development-only
 
-To enable writes for a controlled synthetic demo, set `ENABLE_DEMO_WRITES=true`,
-create a high-entropy `DEMO_WRITE_KEY` as a secret environment variable, and set
-the same value as the frontend build-time `VITE_DEMO_WRITE_KEY`. Requests must
-send `X-FlowFreeze-Write-Key`. This exposes the key to that frontend bundle, so
-it is suitable only for a disposable, synthetic demo—not a real authorization
-boundary or production wallet workflow. Keep the deployment read-only for a
-public showcase.
+The shared key is committed and shipped to browsers, so it is intentionally
+public and is **not authentication** or a real access-control boundary. Anyone
+can submit synthetic decisions through the demo. Keep all data synthetic and
+never connect this deployment to customer or production wallet systems. For a
+read-only deployment, set `ENABLE_DEMO_WRITES=false` and remove both write-key
+environment variables. Any other public deployment that embeds a key has the
+same limitation, regardless of key entropy.
 
 ## Free-tier behavior and live-demo expectations
 
@@ -81,6 +83,7 @@ bandwidth, and service availability are governed by Render's current plan terms.
 2. Confirm the API health check passes at `/health`.
 3. Confirm `CORS_ORIGINS` exactly contains the deployed frontend origin.
 4. Confirm the frontend's built `VITE_API_BASE_URL` is the deployed API origin.
-5. Leave `ENABLE_DEMO_WRITES=false` for a public demo.
+5. Confirm the public demo remains synthetic-only; set `ENABLE_DEMO_WRITES=false`
+   and remove the frontend key if read-only operation is preferred.
 6. Before presenting, wake the API with `/health` and verify that the first page
    loads from the static site.

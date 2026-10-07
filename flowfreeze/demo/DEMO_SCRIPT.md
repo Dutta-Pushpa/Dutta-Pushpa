@@ -16,7 +16,7 @@ Open `http://127.0.0.1:5173`. The API and frontend run locally; no upay system, 
 
 Reset replaces the local generated SQLite database and clears its analyst audit history. Start/restart the API after reset so the screen refreshes cleanly. Stop both services with `.demostop_demo.ps1`.
 
-## Six-minute walkthrough
+## Six-minute business-operations walkthrough
 
 ### 0:00–0:40 — Set the boundary
 
@@ -24,39 +24,45 @@ Reset replaces the local generated SQLite database and clears its analyst audit 
 
 Show the Overview page and the synthetic data labels.
 
-### 0:40–1:30 — Open a seeded case
+### 0:40–1:20 — Triage and prioritize a seeded case
 
-Open `SCN-06-FANOUT-CASHOUT-0001` from the incident list.
+Open `SCN-06-FANOUT-CASHOUT-0001` from the incident list and frame the case queue as analyst attention support—not an automatic action queue.
 
 **Say:** “This case has a reported transfer and a defined analysis timestamp. We only use transactions visible by that time. The IDs and values are generated for this demonstration.”
 
-### 1:30–2:30 — Follow the flow and attribution
+### 1:20–2:20 — Read the operational case file and follow the flow
 
 Point out the graph, downstream wallets, cash-out evidence, and proportional taint table. Select one wallet and show its balance and transaction facts.
 
 **Say:** “Edges show observed gross transfers. Taint is a separate proportional bookkeeping estimate; it is not a legal ownership or fraud finding.”
 
-### 2:30–3:20 — Explain the model and policy
+### 2:20–3:10 — Explain risk, likely next move, and policy recommendation
 
 Show synthetic fraud risk and next-move scores, then the recommendation evidence, cap, and legitimate-value estimate.
 
 **Say:** “The model output is advisory and trained on generated patterns. The policy is a separate layer. An analyst still has to review the evidence and record a decision.”
 
-### 3:20–4:20 — Record a decision
+### 3:10–4:00 — Record an analyst-owned decision
 
 Use a demo reason and reject or modify a proposal. If you record an approval/modification, keep the amount within the displayed bound. Run the one-time simulated outcome and open Audit Log.
 
 **Say:** “This records a local decision and a synthetic what-if estimate. It does not change a wallet balance.”
 
-### 4:20–5:30 — Show evaluation
+### 4:00–5:20 — Show synthetic business and customer-impact measures
 
 Open Evaluation. Show the same-case comparison and held-out model metrics. Call out the added estimated tainted value and the added estimated legitimate value affected, rather than presenting only the positive side.
 
-**Say:** “Across 120 same-family synthetic test cases, the network strategy estimated ৳515,347 more tainted value preserved and ৳84,653 more legitimate value affected than the direct-recipient-only baseline. These are counterfactuals that assume immediate action, not observed outcomes. The classifier’s perfect scores reflect a small test split drawn from the same eight scenario templates; they are not upay performance.”
+**Say:** “The checked-in same-family synthetic test artifact contains 165 cases. Under its immediate-action counterfactual assumptions, the network strategy estimates ৳528,554.03 additional tainted value preserved and ৳28,725.97 additional legitimate value affected versus direct-recipient-only. These are not observed outcomes or upay performance. The 64.194 ms median is local recommendation computation time, not analyst investigation time. Show both potential exposure and legitimate-value impact; do not call this real fraud-loss reduction or customer harm avoided.
 
-### 5:30–6:00 — Reset and validation path
+Point out which KPIs still require analyst trials: actual investigation time, false-positive rate on representative adjudicated cases, unnecessary holds, legitimate value affected, and analyst productivity. “Don't freeze everything—investigate first when appropriate.””
+
+### 5:20–6:00 — Shadow-mode validation path and audit
 
 **Say:** “Before any real-world evaluation, this would need provider authorization, privacy and legal review, independently labeled representative data, out-of-time testing, subgroup and calibration analysis, and operational safeguards. This demo is synthetic only.”
+
+## Required business message
+
+“FlowFreeze helps an MFS fraud operation decide faster, investigate deeper, and intervene more proportionately.” This is the product objective to test, not a proven real-world outcome. FlowFreeze is an intelligence layer, not a transaction engine. The analyst owns the decision; operator policy and systems own any real action.
 
 ## If the live demo fails
 

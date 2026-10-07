@@ -23,6 +23,38 @@ The project was developed as a prototype for the upay BD sponsored hackathon to 
 
 ---
 
+## MFS business value proposition
+
+**For** MFS fraud and risk operations, **FlowFreeze** is an AI fund-flow investigation and decision-support platform that helps analysts detect, trace, quantify, predict, and prioritize suspicious money movement. Unlike transaction-level alerts alone, it combines behavioral risk intelligence with multi-hop fund-flow investigation and proportionate, policy-aware recommendations. It is an intelligence layer—not a payment switch, ledger, or transaction engine—and it does not automatically execute a hold or block. No monetary savings or real-world fraud reduction are claimed until independently validated.
+
+### Business actors and needs
+
+| Actor | What they need from FlowFreeze |
+|---|---|
+| Fraud/Risk Analyst (primary) | A prioritized case queue, explainable evidence, downstream fund trace, exposure estimate, likely next move, recommendation, and a place to record a reasoned decision. |
+| Fraud Operations Manager | Workload and urgency visibility, investigation-time and case-outcome measures, and evidence to plan a controlled pilot. |
+| Compliance/Risk Team | Traceable evidence, policy context, limitations, and an auditable record of human decisions and model versions. |
+| Customer Support / Dispute Team | Clear case context and customer-harm indicators to resolve disputes and avoid unnecessary restrictions. |
+| MFS Risk Platform | In a future authorized shadow integration, a read-only event/context interface and a return channel for evaluation; no action authority in this prototype. |
+| Transaction Monitoring System | Existing alert context that can be enriched; FlowFreeze does not replace alert generation or transaction processing. |
+| MFS customer / account holder | Timely investigation, proportionate evidence-based intervention, and protection from avoidable holds and legitimate-value impact. |
+| MFS operator | Measurable operational effectiveness, controlled risk, policy compliance, and customer trust. |
+
+### AI output → business decision
+
+| AI output | Business use | User | Decision supported (never automatic) |
+|---|---|---|---|
+| Risk score | Prioritize cases for review | Fraud analyst | Which case/wallet to inspect first |
+| Money-flow graph | Identify downstream exposure | Fraud analyst | Which linked wallets and transfers to investigate |
+| Tainted value | Estimate potential financial exposure | Risk manager / analyst | Whether exposure merits further review |
+| Next move | Prioritize intervention timing | Fraud analyst | Whether to investigate urgently or continue monitoring |
+| Recommendation | Support a policy decision | Fraud analyst | Monitor, enhanced review, or escalate/hold under operator policy |
+| Audit trail | Accountability and review | Compliance / risk team | Whether the rationale, evidence, and decision are documented |
+
+### Business workflow
+
+Transaction → existing transaction monitoring → suspicious alert → FlowFreeze intelligence (behavioral risk, fund tracing, exposure, next-move estimate, recommendation) → fraud analyst → monitor / enhanced review / policy-governed escalation or hold / close → audit and feedback → governed model improvement. The MFS operator's authorized systems retain all transaction and action authority. See [Business Workflow](docs/BUSINESS_WORKFLOW.md).
+
 ## Features
 
 In addition to the functionality described throughout this README, FlowFreeze includes:
@@ -67,6 +99,12 @@ Prediction of likely wallet behavior:
 * Synthetic case replay
 
 ---
+
+## Business validation and responsible impact
+
+The current interface and checked-in benchmark use **synthetic generated cases only**. Dashboard counters are labeled as synthetic, counterfactual, or session-measured; they are not evidence of observed loss reduction, customer outcomes, or MFS performance. In the held-out synthetic 165-case comparison, the network strategy estimates ৳528,554.03 additional tainted value preserved versus direct-recipient-only, alongside ৳28,725.97 additional legitimate value affected. These are label-based immediate-action counterfactuals, not actual savings or prevented losses. The benchmark's local median recommendation computation time is 64.194 ms (excluding startup and model/table loading); it is not analyst investigation time. The current synthetic scenario mix is not a basis for a production false-positive rate.
+
+A real-world evaluation requires operator authorization, privacy/legal and compliance review, representative independently adjudicated cases, a read-only shadow-mode deployment, pre-registered measures, subgroup/calibration checks, and a separately approved controlled pilot. Do not use customer or production data in this demo. See [Analyst Trial Guide](docs/ANALYST_TRIAL_GUIDE.md), [Business Workflow](docs/BUSINESS_WORKFLOW.md), [Responsible AI](docs/RESPONSIBLE_AI.md), and [End-to-end evaluation](docs/END_TO_END_EVALUATION.md).
 
 ## Technology Stack
 
@@ -234,6 +272,8 @@ The following project documents provide additional configuration, methodology, a
 * `docs/LIMITATIONS.md`
 * `docs/TAINT_METHODOLOGY.md`
 * `docs/END_TO_END_EVALUATION.md`
+* `docs/BUSINESS_WORKFLOW.md`
+* `docs/ANALYST_TRIAL_GUIDE.md`
 * `docs/RENDER_FREE_TIER.md`
 
 ### Demo Notes
